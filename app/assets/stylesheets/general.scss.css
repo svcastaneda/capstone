@@ -1,0 +1,13 @@
+.m-0 { margin: 0; }
+
+.panel-footer {
+	padding: 0 8px;
+	background-color: transparent;
+}
+
+tr td:first-child, tr th:first-child {
+	width: 5.45em;
+	font-weight: 500;
+}
+
+*[data-toggle]:hover { cursor: pointer; }
