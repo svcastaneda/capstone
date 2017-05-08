@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+f = Faculty.create
+User.create(account: f, username: "faculty", email: "faculty@cdm.depaul.edu", password: "password", fname: "Guy", lname: "Fieri")
+s = Student.create(major: "CS", concentration: "software engineering", graduation_year: 2017, phone_number: "77735587370", bachelors_origin: "CS", advisor_id: f.id)
+User.create(account: s, username: "svcastaneda", email: "svcastaneda@gmail.com", password: "password", fname: "Saundra", lname: "Castaneda")
