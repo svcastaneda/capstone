@@ -9,3 +9,5 @@ tr td:first-child, tr th:first-child {
 	width: 5.45em;
 	font-weight: 500;
 }
+
+*[data-toggle]:hover { cursor: pointer; }
