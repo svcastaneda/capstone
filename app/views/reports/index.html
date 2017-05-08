@@ -1,8 +1,8 @@
 <div class="container row">
 	<h2 class="pull-left m-0">Reports</h2>
-	<button type="button" class="btn btn-sm btn-success pull-right">
-		<span class="glyphicon glyphicon-plus"></span> new report
-	</button>
+	<%= link_to "<button type='button' class='btn btn-sm btn-success pull-right'>
+		<span class='glyphicon glyphicon-plus'></span> new report
+	</button>".html_safe, new_report_path, method: "get" %>
 </div>
 
 <div class="panel-group" id="report1Accordion" role="tablist" aria-multiselectable="true">
