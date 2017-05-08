@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     if current_user
-      redirect_to profile_path(current_user.profile)
+      redirect_to settings_path
     else
       render template: 'users/login'
     end
