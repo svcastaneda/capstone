@@ -1,0 +1,23 @@
+.navbar {
+	background-image: linear-gradient(to bottom,#15477F 0,#183E6A 100%);
+	border: none;
+	border-radius: 0;
+}
+
+.navbar-header {
+	color: white;
+}
+
+.navbar-nav a, .navbar-brand {
+	color: white !important;
+	text-shadow: none;
+}
+
+.navbar-nav a:hover, .navbar-brand:hover {
+	color: #EBEBEB !important;
+}
+
+.navbar-default .navbar-toggle {
+		background-color: white;
+}
+
