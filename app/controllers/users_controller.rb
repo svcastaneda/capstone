@@ -3,6 +3,22 @@ class UsersController < ApplicationController
   end
   
   def new
+    if current_user
+      redirect_to root_path
+    else
+      @user = User.new
+    end
+  end
+  
+  def create
+    @user = User.new(user_params)
+    account = user_params[:account_type] == "Student" ? Student.new(student_params) : Faculty.new
+    if @user.save && account.save
+      session[:user_id] = @user.id
+      redirect_to root_path
+    else
+      render template: 'users/new'
+    end
   end
   
   def edit
@@ -22,6 +38,10 @@ class UsersController < ApplicationController
   
   private
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :password, :password_confirmation)
+    params.require(:user).permit(:fname, :lname, :id, :email, :username, :password, :password_confirmation)
+  end
+  
+  def student_params
+    # params.require(:student).
   end
 end
