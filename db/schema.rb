@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170503160415) do
+ActiveRecord::Schema.define(version: 20170515154359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", force: :cascade do |t|
+  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
+    t.string   "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -25,7 +26,11 @@ ActiveRecord::Schema.define(version: 20170503160415) do
     t.string "day_type", limit: 5, null: false
   end
 
-  create_table "course_lists", force: :cascade do |t|
+  create_table "course_times", force: :cascade do |t|
+    t.integer "time_type"
+  end
+
+  create_table "courses", force: :cascade do |t|
     t.string  "fall_availability",            limit: 10,              null: false
     t.string  "winter_availability",          limit: 10,              null: false
     t.string  "spring_availability",          limit: 10,              null: false
@@ -50,11 +55,33 @@ ActiveRecord::Schema.define(version: 20170503160415) do
     t.integer "summer_full_days",                                     null: false
   end
 
-  create_table "course_times", force: :cascade do |t|
-    t.integer "time_type"
+  create_table "degree_reqs", force: :cascade do |t|
+    t.integer "degree_id"
+    t.integer "course_id"
+    t.integer "class_type"
   end
 
-  create_table "faculties", force: :cascade do |t|
+  create_table "degrees", force: :cascade do |t|
+    t.string  "name",                            null: false
+    t.integer "num_intro",           default: 0, null: false
+    t.integer "num_foundation",      default: 0, null: false
+    t.integer "num_advanced",        default: 0, null: false
+    t.integer "num_major_electives", default: 0, null: false
+    t.integer "num_open_electives",  default: 0, null: false
+  end
+
+  create_table "params", force: :cascade do |t|
+    t.integer "degree_id"
+    t.integer "courses_per_quarter"
+    t.integer "location"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.integer  "params_id"
+    t.integer  "student_id"
+    t.integer  "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "students", force: :cascade do |t|
