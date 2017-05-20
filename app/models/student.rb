@@ -1,3 +1,3 @@
 class Student < ActiveRecord::Base
-  has_one :user, as: :account
+  belongs_to :user, foreign_key: "id"
 end
