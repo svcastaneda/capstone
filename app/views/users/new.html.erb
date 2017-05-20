@@ -1,4 +1,4 @@
-<%= form_for @user, :html => { class: "form-horizontal col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" }, url: settings_path, method: :patch do |f| %>
+<%= form_for @user, url: new_account_path, :html => { multipart: true, class: "form-horizontal col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" } do |f| %>
 	<fieldset>
 		<div class="form-group">
 		  <%= f.label :fname, "First Name", class: "col-sm-3 control-label" %>
@@ -52,55 +52,33 @@
 			<div class="col-sm-9">
 				<div class="btn-group" data-toggle="buttons">
 				  <label class="btn btn-primary active">
-				    <input type="radio" name="account_type" id="option1" autocomplete="off" value="Student" checked>Student
+				    <input type="radio" name="user[account_type]" id="user_account_type" autocomplete="off" value="Student" checked>Student
 				  </label>
 				  <label class="btn btn-primary">
-				    <input type="radio" name="account_type" id="option2" value="Faculty" autocomplete="off">Faculty
+				    <input type="radio" name="user[account_type]" id="user_account_type" value="Faculty" autocomplete="off">Faculty
 				  </label>
 				</div>
 			</div>
 		</div>
 	</fieldset>
 	
+	<%= fields_for :student, @student do |s| %>
 	<fieldset class="studentFields">
 		<div class="form-group">
-			<label for="major" class="col-sm-3 control-label">Major</label>
+		  <%= s.label :degree_id, class: "col-sm-3 control-label" %>
 			<div class="col-sm-9">
-				<div class="btn-group" data-toggle="buttons">
-				  <label class="btn btn-primary active">
-				    <input type="radio" name="major" id="CS" autocomplete="off" value="CS" checked>CS
-				  </label>
-				  <label class="btn btn-primary">
-				    <input type="radio" name="major" id="IS" value="IS" autocomplete="off">IS
-				  </label>
-				</div>
+				<%= s.select :degree_id, Degree.all.map {|d| [d.name, d.id]}, {}, {class: "form-control"} %>
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="text" class="col-sm-3 control-label">Concentration</label>
+		  <%= s.label :advisor_id, class: "col-sm-3 control-label" %>
 			<div class="col-sm-9">
-				<select class="form-control" name="concentration" id="concentration">
-				  <option>concentration 1</option>
-				  <option>concentration 2</option>
-				  <option>concentration 3</option>
-				  <option>concentration 4</option>
-				  <option>concentration 5</option>
-				</select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="text" class="col-sm-3 control-label">Advisor</label>
-			<div class="col-sm-9">
-				<select class="form-control" name="concentration" id="concentration">
-				  <option>advisor 1</option>
-				  <option>advisor 2</option>
-				  <option>advisor 3</option>
-				  <option>advisor 4</option>
-				  <option>advisor 5</option>
-				</select>
+				<%= s.select :advisor_id, User.where(account_type: "Faculty").map {|a| [a.fname + " " + a.lname, a.id]}, {}, {class: "form-control"} %>
 			</div>
 		</div>
 	</fieldset>
+	<% end %>
+	
 	<div class="form-group">
 		<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
 			<%= f.submit "submit", class: "btn btn-sm btn-primary form-control" %>
@@ -109,7 +87,7 @@
 <% end %>
 
 <script>
-	$("input[name=account_type]").change(function() {
+	$("input[name='user[account_type]']").change(function() {
 		// let accountType = $("[name=account_type]:checked").val();
 		$('.studentFields').toggle();
 	});

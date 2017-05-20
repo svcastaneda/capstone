@@ -1,0 +1,7 @@
+<p><%= @user.fname + ' ' + @user.lname %></p>
+<p><%= @user.id %></p>
+course history<br>
+reports<br>
+<% if current_user.admin? %>
+edit
+<% end %>
