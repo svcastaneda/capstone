@@ -11,16 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515154359) do
+ActiveRecord::Schema.define(version: 20170517195106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "ar_internal_metadata", primary_key: "key", force: :cascade do |t|
-    t.string   "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "course_days", force: :cascade do |t|
     t.string "day_type", limit: 5, null: false
@@ -76,7 +70,7 @@ ActiveRecord::Schema.define(version: 20170515154359) do
     t.integer "location"
   end
 
-  create_table "plans", force: :cascade do |t|
+  create_table "reports", force: :cascade do |t|
     t.integer  "params_id"
     t.integer  "student_id"
     t.integer  "course_id"
@@ -85,19 +79,13 @@ ActiveRecord::Schema.define(version: 20170515154359) do
   end
 
   create_table "students", force: :cascade do |t|
-    t.string   "major",            null: false
-    t.string   "concentration",    null: false
-    t.integer  "graduation_year",  null: false
-    t.string   "phone_number",     null: false
-    t.string   "bachelors_origin", null: false
-    t.integer  "advisor_id",       null: false
-    t.integer  "last_path"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.integer  "advisor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "degree_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer  "account_id",                 null: false
     t.string   "account_type",               null: false
     t.string   "username",        limit: 30, null: false
     t.string   "email",           limit: 30, null: false
@@ -108,4 +96,5 @@ ActiveRecord::Schema.define(version: 20170515154359) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_foreign_key "students", "degrees"
 end
