@@ -3,6 +3,8 @@ class ReportsController < ApplicationController
   end
   
   def new
+    @report = Report.new
+    @params = Param.new
   end
   
   def show
