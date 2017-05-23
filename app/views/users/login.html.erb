@@ -1,19 +1,48 @@
-<%= form_for :user, url: login_path, html: {class: "form-horizontal col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"} do |f| %>
-	<div class="form-group">
-		<%= f.label :username, class: "col-sm-2 control-label" %>
-		<div class="col-sm-10">
-	    <%= f.text_field :username, class: "form-control", placeholder: "username" %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Capstone</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div class="row">
+		<div class="left col-md-6 col-sm-6 welcome text-center">
+			<h1 class="mt-0">DePaul University</h1>
+			<%= image_tag("logoCDM.png") %>
+			<h3>When If</h3>
+			<p>Easily determine the fastest path towards graduation.</p>
+		</div>
+		<div class="right col-md-6 col-sm-6">
+			<%= form_for :user, url: login_path, html: {class: "form-horizontal col-sm-8 col-sm-offset-2 col-xs-6 col-xs-offset-3 login-form"} do |f| %>
+				<div class="form-group">
+					<%= f.label :username, class: "ontrol-label" %>
+					<div class="">
+				    <%= f.text_field :username, class: "form-control", placeholder: "username" %>
+					</div>
+				</div>
+				<div class="form-group">
+					<%= f.label :password, class: "control-label" %>
+					<div class="">
+						<%= f.password_field :password, class: "form-control", placeholder: "password" %>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="text-center">
+						<%= f.submit :submit, class: "btn btn-sm btn-primary center-block", value: "login" %>
+						<%= link_to 'create an account', new_account_path, class: "mt-1" %>
+					</div>
+				</div>
+			<% end %>
 		</div>
 	</div>
-	<div class="form-group">
-		<%= f.label :password, class: "col-sm-2 control-label" %>
-		<div class="col-sm-10">
-			<%= f.password_field :password, class: "form-control", placeholder: "password" %>
-		</div>
-	</div>
-	<div class="form-group">
-		<div class="col-sm-4 col-sm-offset-4">
-			<%= f.submit :submit, class: "btn btn-sm btn-primary form-control", value: "login" %>
-		</div>
-	</div>
-<% end %>
+</body>
+</html>
