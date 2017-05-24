@@ -5,7 +5,7 @@
 			
 		  <%= f.label :courses_per_quarter, class: "col-sm-3 control-label" %>
 			<div class="col-sm-9">
-			  <%= f.number_field :courses_per_quarter, class: "form-control", value: 1 %>
+			  <%= f.number_field :courses_per_quarter, class: "form-control", value: 1, min: 1, max: 4 %>
 			</div>
 		</div>
 		<div class="form-group">
@@ -25,33 +25,16 @@
 			</div>
 		</div>
 	</fieldset>
-	<fieldset>
+	<%= fields_for :student, @student do |s| %>
+	<fieldset class="studentFields">
 		<div class="form-group">
-			<label for="major" class="col-sm-3 control-label">Major</label>
+		  <%= s.label :degree_id, class: "col-sm-3 control-label" %>
 			<div class="col-sm-9">
-				<div class="btn-group" data-toggle="buttons">
-				  <label class="btn btn-primary active">
-				    <input type="radio" name="major" id="option1" autocomplete="off" checked>CS
-				  </label>
-				  <label class="btn btn-primary">
-				    <input type="radio" name="major" id="option2" autocomplete="off">IS
-				  </label>
-				</div>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="text" class="col-sm-3 control-label">Concentration</label>
-			<div class="col-sm-9">
-				<select class="form-control" name="concentration" id="concentration">
-				  <option>concentration 1</option>
-				  <option>concentration 2</option>
-				  <option>concentration 3</option>
-				  <option>concentration 4</option>
-				  <option>concentration 5</option>
-				</select>
+				<%= s.select :degree_id, Degree.all.map {|d| [d.name, d.id]}, {selected: @student.degree_id}, {class: "form-control"} %>
 			</div>
 		</div>
 	</fieldset>
+	<% end %>
 	<div class="form-group">
 		<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
 			<button type="submit" class="btn btn-success">run report</button>
