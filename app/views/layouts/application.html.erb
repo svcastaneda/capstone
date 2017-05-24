@@ -33,24 +33,28 @@
 			<%= link_to "When If", root_path, :class => "navbar-brand" %>
     </div>
 
+		<% if current_user %>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-				<% if current_user %>
+				<% if current_user.student? %>
 					<li><a href="<%= reports_path %>" title="track reports"><span class="glyphicon glyphicon-calendar"></span> <p class="visible-xs-inline">track reports</p></a></li>
 					<li><a href="<%= course_histories_path %>" title="course history"><span class="glyphicon glyphicon-education"></span> <p class="visible-xs-inline">course history</p> </a></li>
-				  <li><a href="<%= settings_path %>" title="settings"><span class="glyphicon glyphicon-cog"></span> <p class="visible-xs-inline">settings</p></a></li>
-          <li>
-						<%= link_to logout_path, method: :delete, title: "logout" do %>
-							<span class="glyphicon glyphicon-log-out"></span> <p class="visible-xs-inline">logout</p>
-						<% end %>
-					</li>
-				<% else %>
-          <li><%= link_to("login", login_path) %></li>
-					<li><%= link_to("register", new_account_path) %></li>
+				<% elsif current_user.faculty? %>
+					<li><a href="<%= students_path %>"><span class="glyphicon glyphicon-user"></span> <p class="visible-xs-inline">students</p></a></li>
 				<% end %>
+				<% if current_user.admin? %>
+					<li><a href="<%= users_path %>"><span class="glyphicon glyphicon-user"></span> <p class="visible-xs-inline">users</p></a></li>
+				<% end %>
+			  <li><a href="<%= settings_path %>" title="settings"><span class="glyphicon glyphicon-cog"></span> <p class="visible-xs-inline">settings</p></a></li>
+        <li>
+					<%= link_to logout_path, method: :delete, title: "logout" do %>
+						<span class="glyphicon glyphicon-log-out"></span> <p class="visible-xs-inline">logout</p>
+					<% end %>
+				</li>
       </ul>
     </div><!-- /.navbar-collapse -->
+		<% end %>
   </div><!-- /.container-fluid -->
 </nav>
 
