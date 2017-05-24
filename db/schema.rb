@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170517195106) do
+ActiveRecord::Schema.define(version: 20170523234818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,9 @@ ActiveRecord::Schema.define(version: 20170517195106) do
     t.integer "summer_full_times",                                    null: false
     t.integer "summer_2nd_half_days",                                 null: false
     t.integer "summer_full_days",                                     null: false
+    t.string  "name",                                                 null: false
+    t.string  "subject",                                              null: false
+    t.integer "number",                                               null: false
   end
 
   create_table "degree_reqs", force: :cascade do |t|
