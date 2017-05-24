@@ -1,0 +1,14 @@
+<div class="row">
+	<h2 class="col-xs-8 m-0"><%= @user.fname + ' ' + @user.lname %></h2>
+	<% if current_user.admin? %>
+	<div class="col-xs-4 text-right">
+		<%= link_to 'edit', @user.student? ? edit_student_path(@user.id) : edit_faculty_path(@user.id), class: "btn btn-sm btn-success" %>
+		<%= link_to 'delete', user_path(@user.id), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-sm btn-danger" %>
+	</div>
+	<% end %>
+</div>
+
+
+<p class="small text-muted"><%= @user.id %></p>
+course history<br>
+reports<br>

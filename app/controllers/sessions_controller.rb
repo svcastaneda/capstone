@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     if current_user
       redirect_to settings_path
     else
-      render template: 'users/login'
+      render template: 'users/login', layout: false
     end
   end
 
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       @errors = ['wrong credentials']
-      render template: 'users/login'
+      render template: 'users/login', layout: false
     end
   end
 
