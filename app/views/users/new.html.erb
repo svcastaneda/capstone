@@ -79,16 +79,26 @@
 	</fieldset>
 	<% end %>
 	
+	<%= render partial: "terms_and_conditions" %>
+	
+	<div class="form-group">
+		<input type="checkbox" id="tc" value="yes"> <label for="tc">I have read and agree to the terms &amp; conditions</label>
+	</div>
+	
 	<div class="form-group">
 		<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-			<%= f.submit "submit", class: "btn btn-sm btn-primary form-control" %>
+			<%= f.submit "submit", id: "submit", class: "btn btn-sm btn-primary form-control disabled", disabled: true %>
 		</div>
 	</div>
 <% end %>
 
 <script>
 	$("input[name='user[account_type]']").change(function() {
-		// let accountType = $("[name=account_type]:checked").val();
 		$('.studentFields').toggle();
 	});
+	
+	$("#tc").click(function() {
+		 $("#submit").attr("disabled", ! $(this).is(':checked'));
+		 $('#submit').toggleClass('disabled');
+	})
 </script>
