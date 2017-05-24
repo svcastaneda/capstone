@@ -12,18 +12,9 @@ class UsersController < ApplicationController
     end
   end
   
-  def students
-    if current_user && !current_user.student?
-      @users = User.where(account_type: 'Student')
-      render template: 'users/index'
-    else
-      redirect_to root_path
-    end
-  end
-  
-  def faculty
+  def all_users
     if current_user && current_user.admin?
-      @users = User.where(account_type: 'Faculty')
+      @users = User.where.not(id: current_user.id)
       render template: 'users/index'
     else
       redirect_to root_path
@@ -50,7 +41,7 @@ class UsersController < ApplicationController
     @student = Student.new(student_params)
     account = user_params[:account_type] == "Student" ? @student : @user
     if @user.save && account.save
-      @student.update_attributes(id: @user.id)
+      @student.update_attributes(id: @user.id) if @user.student?
       session[:user_id] = @user.id
       redirect_to root_path
     else
@@ -59,21 +50,34 @@ class UsersController < ApplicationController
   end
   
   def edit
-    current_user ? (@user = current_user) : (redirect_to login_path)
-    @student = Student.find_by_id(current_user.id)
+    redirect_to login_path if !current_user
+    @user = params[:id] ? User.find(params[:id]) : current_user
+    @student = Student.find_by_id(@user.id)
   end
   
   def update
-    @user = current_user
+    @user = params[:id] ? User.find(params[:id]) : current_user
     @student = Student.find_by_id(@user.id)
     if @student && @student.update_attributes(student_params) && @user.update_attributes(user_params)
-      redirect_to settings_path
-    elsif @user.update_attributes(user_params)
-      redirect_to settings_path
+      flash[:success] = "Profile updated"
+      redirect_to edit_student_path(@user)#settings_path
+    elsif @user && @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"
+      if @user == current_user
+        redirect_to settings_path
+      else
+        redirect_to edit_faculty_path(@user)
+      end
     else
       @errors = @user.errors.full_messages
       render template: 'users/edit'
     end
+  end
+  
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to users_path
   end
   
   private
