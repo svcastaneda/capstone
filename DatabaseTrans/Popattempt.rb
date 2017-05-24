@@ -1,10 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+Change time type to string, will use the built in ID to find it
+
 course_days.create(:day_type => 'M')
 course_days.create(:day_type => 'Tu')
 course_days.create(:day_type => 'W')
@@ -50,6 +45,8 @@ course_times.create(:time_type => 'SumFull_10:10 to 11:40')
 course_times.create(:time_type => 'SumFull_15:10 to 16:40')
 course_times.create(:time_type => 'SumFull_09:00 to 12:15')
 course_times.create(:time_type => 'SumFull_Online')
+
+
 
 Courses.create(:num => 'CSC400', :name => 'Discrete Structures for Computer Science', :description => ' An introduction to programming with a focus on problem solving, structured programming, and algorithm design with a gentle introduction to efficiency. Concepts covered include data types, expressions, variables, assignments, conditional and iterative structures, functions, file input/output, exceptions, namespaces, and recursion.', :times => {1,1,6,7,7,12,13,18,19,24}, dates => {1,3,9,2,4,9,4,9,7,9}, :prerequisites => {})
 Courses.create(:num => 'CSC401', :name => 'Introduction to Programming',:description => '', :times => {1,1,1,6,7,7,12,13,13,18,19,24,25,30}, :dates => {1,3,4,9,3,4,9,2,4,9,8,9,8,9}, :prerequisites => {})
@@ -200,3 +197,6 @@ Courses.create(:num => 'GPH570', :name => 'Visualization:',:description => '(For
 Courses.create(:num => 'GPH572', :name => 'Principles of Computer Animation',:description => ' (Formerly CSC 572) This course will cover a range of topics in introductory 3D Computer Animation. Topics covered will include key framing, interpolation, hierarchies, inverse kinematics, particle systems, and the basics of physically based simulation and modeling.', :times => {13,18}, :dates => {3,9}, :prerequisites => {'GPH469'})
 Courses.create(:num => 'GPH580', :name => 'Hardware Shading Techniques:',:description => ' This class explores the current trends in programmable computer graphics hardware. Modern graphics processing units (GPUs) are becoming increasingly powerful and fully programmable parallel processing units. They make extremely sophisticated effects in computer graphics, such as shadows, displacement maps, skinning, motion blur, reflections and refractions, possible in real-time scenes. In addition these increasingly general programmable units are being used for far more general computing problems from traditional searching and sorting algorithms to computational problems in physics such as the diffusion equation and fluid flow. In this course we will explore the applications of hardware shading to computer graphics, including advanced lighting, shading and surface effects. As time allows, we will explore other applications such as physics and computer science.', :times => {13,18}, :dates => {3,9}, :prerequisites => {'GPH469'})
 Courses.create(:num => 'HCI440', :name => 'Introduction to User-Centered Design',:description => 'The user-interface development process. Introduction to methods for practicing user-centered design including user and task analysis, user interface design principles and testing using low-fidelity prototypes. Students may not receive credit for this course and HCI 441. ', :times => {1,6,7,7,12,13,18}, :dates => {1,9,1,3,9,3,9}, :prerequisites => {})
+
+/Template/
+/Courses.create(:num => 'GAM', :name => '',:description => '', :times => {}, :dates => {}, :prerequisites => {})
