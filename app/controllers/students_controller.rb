@@ -1,7 +1,7 @@
 class StudentsController < UsersController
   def index
     if current_user && !current_user.student?
-      @users = User.where(account_type: 'Student')
+      @users = User.where(account_type: 'Student').paginate(:page => params[:page], :per_page => 25)
       render template: 'users/index'
     else
       redirect_to root_path

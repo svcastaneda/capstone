@@ -1,7 +1,7 @@
 class FacultyController < UsersController
   def index
     if current_user && current_user.admin?
-      @users = User.where(account_type: 'Faculty')
+      @users = User.where(account_type: 'Faculty').paginate(:page => params[:page], :per_page => 25)
       render template: 'users/index'
     else
       redirect_to root_path
@@ -40,9 +40,5 @@ class FacultyController < UsersController
   private
   def user_params
     params.require(:user).permit(:fname, :lname, :id, :email, :username, :password, :password_confirmation, :account_type)
-  end
-  
-  def student_params
-    params.require(:student).permit(:degree_id, :advisor_id)
   end
 end

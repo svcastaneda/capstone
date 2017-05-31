@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   
   def all_users
     if current_user && current_user.admin?
-      @users = User.where.not(id: current_user.id)
+      @users = User.where.not(id: current_user.id).paginate(:page => params[:page], :per_page => 25)
       render template: 'users/index'
     else
       redirect_to root_path
