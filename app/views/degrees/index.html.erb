@@ -1,0 +1,18 @@
+<table class="table table-bordered">
+	<tr>
+		<th>Num</th>
+		<th>Name</th>
+	</tr>
+<% @degrees.each do |d| %>
+	<tr>
+		<td><%= d.id %></td>
+		<td>
+			<%= link_to d.name, degree_path(d.id) %>
+			<div class="pull-right">
+				<%#= link_to 'edit', edit_degree_path(d.id), class: "btn btn-xs btn-success" %>
+				<%= link_to 'delete', course_path(d.id), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-xs btn-danger" %>
+			</div>
+		</td>
+	</tr>
+<% end %>
+</table>

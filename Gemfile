@@ -29,6 +29,8 @@ gem 'bcrypt', '~> 3.1.7'
 #devise for user login
 gem 'devise'
 
+gem 'will_paginate', '~> 3.0.6'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
