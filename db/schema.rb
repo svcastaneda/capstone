@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523234818) do
+ActiveRecord::Schema.define(version: 20170524231029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "course_days", force: :cascade do |t|
-    t.string "day_type", limit: 5, null: false
+    t.string "day_type", limit: 10, null: false
   end
 
   create_table "course_times", force: :cascade do |t|
@@ -25,31 +25,12 @@ ActiveRecord::Schema.define(version: 20170523234818) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string  "fall_availability",            limit: 10,              null: false
-    t.string  "winter_availability",          limit: 10,              null: false
-    t.string  "spring_availability",          limit: 10,              null: false
-    t.string  "summer_1st_half_availability", limit: 10,              null: false
-    t.string  "summer_2nd_half_availability", limit: 10,              null: false
-    t.string  "summer_full_availability",     limit: 10,              null: false
-    t.string  "phase",                        limit: 1,               null: false
-    t.string  "prerequisites",                           default: [], null: false, array: true
-    t.text    "description",                                          null: false
-    t.integer "peoplesoft",                                           null: false
-    t.integer "fall_times",                                           null: false
-    t.integer "winter_times",                                         null: false
-    t.integer "spring_times",                                         null: false
-    t.integer "summer_1st_half_times",                                null: false
-    t.integer "fall_days",                                            null: false
-    t.integer "winter_days",                                          null: false
-    t.integer "spring_days",                                          null: false
-    t.integer "summer_1st_half_days",                                 null: false
-    t.integer "summer_2nd_half_times",                                null: false
-    t.integer "summer_full_times",                                    null: false
-    t.integer "summer_2nd_half_days",                                 null: false
-    t.integer "summer_full_days",                                     null: false
-    t.string  "name",                                                 null: false
-    t.string  "subject",                                              null: false
-    t.integer "number",                                               null: false
+    t.string  "num",           limit: 10,              null: false
+    t.string  "name",                                  null: false
+    t.text    "description",                           null: false
+    t.string  "prerequisites",            default: [], null: false, array: true
+    t.integer "times",                    default: [], null: false, array: true
+    t.integer "dates",                    default: [], null: false, array: true
   end
 
   create_table "degree_reqs", force: :cascade do |t|
