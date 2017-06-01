@@ -1,0 +1,26 @@
+.t-and-c {
+	height: 11em;
+	overflow: scroll;
+	border: 1px solid grey;
+	margin: 1em 0;
+}
+
+.welcome {
+	background-color: #004774;
+	color: white;
+}
+
+@media screen and (min-width: 767px) {
+	.welcome,
+	.login-form {
+		padding-top: 35vh;
+		height: 100vh;
+	}
+}
+
+@media screen and (max-width: 766px) {
+	.welcome,
+	.login-form {
+		padding: 3em;
+	}
+}

@@ -1,0 +1,65 @@
+<%= form_for @user, :html => { multipart: true, class: "form-horizontal col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" }, url: settings_path, method: :patch do |f| %>
+	<fieldset>
+		<div class="form-group">
+	    <label class="col-sm-3 control-label">Name</label>
+	    <div class="col-sm-9">
+	      <p class="form-control-static"><%= @user.fname %> <%= @user.lname %></p>
+	    </div>
+		</div>
+		<div class="form-group">
+	    <label class="col-sm-3 control-label">Student ID</label>
+	    <div class="col-sm-9">
+	      <p class="form-control-static"><%= @user.id %></p>
+	    </div>
+	  </div>
+  </fieldset>
+	<fieldset>
+		<div class="form-group">
+		  <%= f.label :email, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+			  <%= f.email_field :email, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= f.label :username, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+			  <%= f.text_field :username, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :password, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+				<%= f.password_field :password, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :password_confirmation, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+				<%= f.password_field :password_confirmation, class: "form-control" %>
+			</div>
+		</div>
+	</fieldset>
+	<% if @user.account_type == "Student" %>
+		<%= fields_for :student, @student do |s| %>
+		<fieldset class="studentFields">
+			<div class="form-group">
+			  <%= s.label :degree_id, class: "col-sm-3 control-label" %>
+				<div class="col-sm-9">
+					<%= s.select :degree_id, Degree.all.map {|d| [d.name, d.id]}, {}, {class: "form-control"} %>
+				</div>
+			</div>
+			<div class="form-group">
+			  <%= s.label :advisor_id, class: "col-sm-3 control-label" %>
+				<div class="col-sm-9">
+					<%= s.select :advisor_id, User.where(account_type: "Faculty").map {|a| [a.fname + " " + a.lname, a.id]}, {}, {class: "form-control"} %>
+				</div>
+			</div>
+		</fieldset>
+		<% end %>
+	<% end %>
+	<div class="form-group">
+		<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+			<%= f.submit "submit", class: "btn btn-sm btn-primary form-control" %>
+		</div>
+	</div>
+<% end %>

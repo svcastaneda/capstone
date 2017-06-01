@@ -1,0 +1,25 @@
+<div class="row">
+	<h2 class="col-xs-8 m-0"><%= @degree.name %></h2>
+	<% if current_user.admin? %>
+	<div class="col-xs-4 text-right">
+		<%#= link_to 'edit', edit_degree_path(@degree.id), class: "btn btn-sm btn-success" %>
+		<%= link_to 'delete', degree_path(@degree.id), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-sm btn-danger" %>
+	</div>
+	<% end %>
+</div>
+
+<!-- <div>
+	<p><%#= @degree.description %></p>
+</div> -->
+
+<%#= @degree.prerequisites %>
+<%#= @degree.degree_days.map { |d| d.day_type}.join(", ") %>
+
+<!-- <div>
+	<ul>
+	<%# @degree.degree_days.each do |d| %>
+		<li><%#= d.day_type %></li>
+	<%# end %>
+	</ul>
+</div>
+<%#= @degree.times %> -->

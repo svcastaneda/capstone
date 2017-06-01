@@ -1,0 +1,104 @@
+<%= form_for @user, url: new_account_path, :html => { multipart: true, class: "form-horizontal col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2" } do |f| %>
+	<fieldset>
+		<div class="form-group">
+		  <%= f.label :fname, "First Name", class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+			  <%= f.text_field :fname, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= f.label :lname, "Last Name", class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+			  <%= f.text_field :lname, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= f.label :id, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+			  <%= f.text_field :id, class: "form-control" %>
+			</div>
+		</div>
+  </fieldset>
+	<fieldset>
+		<div class="form-group">
+		  <%= f.label :email, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+			  <%= f.email_field :email, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= f.label :username, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+			  <%= f.text_field :username, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :password, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+				<%= f.password_field :password, class: "form-control" %>
+			</div>
+		</div>
+		<div class="form-group">
+			<%= f.label :password_confirmation, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+				<%= f.password_field :password_confirmation, class: "form-control" %>
+			</div>
+		</div>
+	</fieldset>
+	
+	<fieldset>
+		<div class="form-group">
+			<%= f.label :account_type, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+				<div class="btn-group" data-toggle="buttons">
+				  <label class="btn btn-primary active">
+				    <input type="radio" name="user[account_type]" id="user_account_type" autocomplete="off" value="Student" checked>Student
+				  </label>
+				  <label class="btn btn-primary">
+				    <input type="radio" name="user[account_type]" id="user_account_type" value="Faculty" autocomplete="off">Faculty
+				  </label>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+	
+	<%= fields_for :student, @student do |s| %>
+	<fieldset class="studentFields">
+		<div class="form-group">
+		  <%= s.label :degree_id, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+				<%= s.select :degree_id, Degree.all.map {|d| [d.name, d.id]}, {}, {class: "form-control"} %>
+			</div>
+		</div>
+		<div class="form-group">
+		  <%= s.label :advisor_id, class: "col-sm-3 control-label" %>
+			<div class="col-sm-9">
+				<%= s.select :advisor_id, User.where(account_type: "Faculty").map {|a| [a.fname + " " + a.lname, a.id]}, {}, {class: "form-control"} %>
+			</div>
+		</div>
+	</fieldset>
+	<% end %>
+	
+	<%= render partial: "terms_and_conditions" %>
+	
+	<div class="form-group">
+		<input type="checkbox" id="tc" value="yes"> <label for="tc">I have read and agree to the terms &amp; conditions</label>
+	</div>
+	
+	<div class="form-group">
+		<div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+			<%= f.submit "submit", id: "submit", class: "btn btn-sm btn-primary form-control disabled", disabled: true %>
+		</div>
+	</div>
+<% end %>
+
+<script>
+	$("input[name='user[account_type]']").change(function() {
+		$('.studentFields').toggle();
+	});
+	
+	$("#tc").click(function() {
+		 $("#submit").attr("disabled", ! $(this).is(':checked'));
+		 $('#submit').toggleClass('disabled');
+	})
+</script>

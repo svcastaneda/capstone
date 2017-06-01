@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+	<tr>
+		<th>ID</th>
+		<th>Type</th>
+		<th>Name</th>
+	</tr>
+<% @users.each do |u| %>
+	<tr>
+		<td><%= u.id %></td>
+		<td><%= u.account_type %></td>
+		<td>
+			<%= link_to u.fname + ' ' + u.lname, u.student? ? student_path(u.id) : faculty_path(u.id) %>
+			<% if current_user.admin? %>
+			<div class="pull-right">
+				<%= link_to 'edit', u.student? ? edit_student_path(u.id) : edit_faculty_path(u.id), class: "btn btn-xs btn-success" %>
+				<%= link_to 'delete', user_path(u.id), method: :delete, data: { confirm: "You sure?" }, class: "btn btn-xs btn-danger" %>
+			</div>
+			<% end %>
+		</td>
+	</tr>
+<% end %>
+</table>
