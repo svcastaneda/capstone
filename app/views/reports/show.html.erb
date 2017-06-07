@@ -5,8 +5,8 @@
 	</button>".html_safe, new_report_path, method: "get" %>
 </div>
 <div class="container row">
-	<div class="pill">Computer Science</div>
-	<div class="pill">2 classes per quarter</div>
+	<div class="pill"><%= @params.degree.name %></div>
+	<div class="pill"><%= @params.courses_per_quarter %> classes per quarter</div>
 	<div class="pill">both</div>
 </div>
 
@@ -15,221 +15,46 @@
 		<tr>
 			<th>#</th>
 			<th>course name</th>
-			<th>domain</th>
+			<!-- <th>domain</th> -->
 		</tr>
 	</thead>
 	<tbody>
-    <tr>
-      <th colspan="3">
-				Autumn 2017
-			</th>
-		</tr>
-	  <tr data-toggle="modal" data-target="#se430">
-			<th scope="row">SE 430</th>
-			<td>Object Oriented Modeling</td>
-			<td>foundation</td>
-		</tr>
-	  <tr data-toggle="modal" data-target="#se450">
-			<th scope="row">SE 450</th>
-			<td>Object Oriented Software Development</td>
-			<td>foundation</td>
-		</tr>
-    <tr>
-      <th colspan="3">
-				Winter 2017
-			</th>
-		</tr>
-		<tr data-toggle="modal" data-target="#csc471">
-			<th scope="row">CSC 471</th>
-			<td>Mobile Application Development in iOS</td>
-			<td>elective</td>
-		</tr>
-    <tr>
-      <th colspan="3">
-				Spring 2017
-			</th>
-		</tr>
-		<tr data-toggle="modal" data-target="#se433">
-			<th scope="row">SE 433</th>
-			<td>Software Testing &amp; QA</td>
-			<td>foundation</td>
-		</tr>
-	  <tr data-toggle="modal" data-target="#se475">
-			<th scope="row">SE 475</th>
-			<td>Managing Globally Distributed Software Development</td>
-			<td>advanced</td>
-		</tr>
-    <tr>
-      <th colspan="3">
-				Autumn 2018
-			</th>
-		</tr>
-	  <tr data-toggle="modal" data-target="#se482">
-			<th scope="row">SE 482</th>
-			<td>Requirements Engineering</td>
-			<td>advanced</td>
-		</tr>
-	  <tr data-toggle="modal" data-target="#se579">
-			<th scope="row">SE 579</th>
-			<td>Analytics &amp; Data Mining in Software Engineering</td>
-			<td>advanced</td>
-		</tr>
+		<% @classes.each_with_index do |q, i| %>
+	    <tr>
+	      <th colspan="2">
+					Quarter <%= i+1 %>
+				</th>
+			</tr>
+			<% q.each do |c| %>
+			  <tr data-toggle="modal" data-target="#<%= c.num %>">
+					<th scope="row"><%= c.num %></th>
+					<td><%= c.name %></td>
+					<!-- <td>foundation</td> -->
+				</tr>
+			<% end %>
+		<% end %>
 	</tbody>
 </table>
 
 <!-- Modals -->
-<div class="modal fade" id="se430" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">SE 430 - Object Oriented Modeling</h4>
-      </div>
-      <div class="modal-body">
-        <p>Object-oriented modeling techniques for analysis and design. Provides the tools and techniques needed to solve complex, real-world software engineering problems in an object-oriented manner, using the most effective elements of the Unified Process. The course covers the essential concepts and notation of the Unified Modeling Language (UML), the standard notation for object-oriented analysis and design. Team project. PREREQUISITE(S): CSC 403</p>
-				<b>Typically offered:</b> Autumn/Winter/Spring Terms
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="oe1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Major Elective</h4>
-      </div>
-      <div class="modal-body">
-				...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="oe2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Major Elective</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="se450" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">SE 450 - Object Oriented Software Development</h4>
-      </div>
-      <div class="modal-body">
-				<p>Principle, techniques and tools of object-oriented modeling, design, implementation, and testing of large-scale software systems. Topics include design patterns, application frameworks, architectural design, and the applications in the software development process to improve the extensibility, maintainability, and reliability of software systems. PREREQUISITE(S): CSC 403</p>
-				<b>Typically offered:</b> Autumn/Winter/Spring Terms
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="se433" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">SE 433 - Software Testing &amp; QA</h4>
-      </div>
-      <div class="modal-body">
-        <p>This course is designed for the software engineering professional to gain a greater understanding of the key ingredients in creating and/or managing a successful testing program to meet project needs. Topics covered include test lifecycle planning, test design &amp; coverage analysis, complexity, levels of testing such as unit, integration, system, performance and stress testing. Best practice strategies in software testing such as verification &amp; validation, early lifecycle testing, risk based testing and automation will also be examined including exposure to test automation methods and tools. PREREQUISITE(S): CSC 403</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="csc471" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">CSC 471 - Mobile Application Development for iOS</h4>
-      </div>
-      <div class="modal-body">
-        <p>This course introduces the core issues associated with application development for mobile devices using the iOS platform. Students will learn the Swift language, the XCode IDE, UIKit and other frameworks, the elements and architecture of the user interfaces, and more. Students will be exposed to the iOS system architecture including memory management, MVC, delegates and threads. Topics will also include understanding and handling of multi-touch events, gestures, and motion events. PREREQUISITE(S): CSC 403 and CSC 407</p>
-				<b>Typically offered:</b> Winter Term
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="se475" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">SE 475 - Managing Globally Distributed Software Development</h4>
-      </div>
-      <div class="modal-body">
-        <p>Managing Globally Distributed Software Development (GDSD) for IT projects. Issues associated with time zone differences, infrastructure support, geographical dispersion, and lack of centralized communication. The course will focus on the management, implementation and deployment of software within the context of outsourced, distributed development, and insourced projects. Additional topics include strategic management issues such as justification, vetting, consulting services and partnerships. Course will include several hands-on distributed development projects. PREREQUISITE(S): CSC 403</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="se482" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">SE 482 - Requirements Engineering</h4>
-      </div>
-      <div class="modal-body">
-        <p>Requirements Engineering (RE) plays a critical role in the software development process. This course will introduce related vocabulary, concepts, and techniques, and will examine the role of RE in software and systems engineering. The course will cover topics related to eliciting, validating, negotiating, analyzing, specifying, and managing requirements. Popular RE tools will also be introduced. Prerequisite: SE430 or SE450.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="se579" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">SE 579 - Analytics & Data Mining in Software Engineering</h4>
-      </div>
-      <div class="modal-body">
-        <p>This courses discusses the application of selected statistical analysis, data mining, and machine learning techniques to the area of Software Engineering. These techniques are used for purposes as varied as stakeholder analysis, mining software repositories, trace retrieval, bug prediction, recommender systems in Software Engineering domains, and software process improvement techniques. The course demonstrates how these techniques can be used to enhance project management and other software engineering activities in software intensive systems and provides students with hands-on experience using them on real project data. (No prior knowledge of data mining and knowledge management is assumed.) PREREQUISITE(S): SE 450</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+<% @classes.each do |q| %>
+<% q.each do |c| %>
+	<div class="modal fade" id="<%= c.num %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="myModalLabel"><%= c.num %> - <%= c.name %></h4>
+	      </div>
+	      <div class="modal-body">
+	        <p><%= c.description%> PREREQUISITE(S): <%= c.prerequisites.join(', ') %></p>
+					<!-- <b>Typically offered:</b> Autumn/Winter/Spring Terms -->
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<% end %>
+<% end %>
