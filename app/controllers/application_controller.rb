@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def current_user
     User.find_by(id: session[:user_id]) if session[:user_id]
   end
+  
+  def current_student
+    params[:id] ? Student.find(params[:id]) : current_user.student if session[:user_id]
+  end
 end
