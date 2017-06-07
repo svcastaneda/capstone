@@ -15,6 +15,18 @@ class CoursesController < ApplicationController
   end
   
   def edit
+    if current_user
+      if current_user.admin?
+        @course = Course.find(params[:id])
+        redirect_to root_path if @course.nil?
+      elsif current_user.faculty?
+        redirect_to courses_path
+      else
+        redirect_to root_path
+      end
+    else
+      redirect_to login_path  
+    end
   end
   
   def update

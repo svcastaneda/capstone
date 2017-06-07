@@ -21,50 +21,25 @@
 			</div>
 		</div>
 	</fieldset>
-	<fieldset>
-		<div class="form-group">
-		  <%= f.label :prerequisites, class: "col-sm-3 control-label" %>
-			<div class="col-sm-9">
-				<%= f.prerequisites %>
-				<%#= s.select :prerequisites, Degree.all.collect {|d| [d.name, d.id]}, {selected: @student.degree_id}, {class: "form-control"} %>				
-				<%#= s.select :degree_id, Degree.all.map {|d| [d.name, d.id]}, {}, {class: "form-control"} %>
-			</div>
-		</div>
-
-		<!-- <div class="form-group">
-		  <%#= f.label :dates, class: "col-sm-3 control-label" %>
-			<div class="col-sm-9">
-				<%#= f.select :dates, CourseDay.all.collect {|d| [d.day_type, d.id]}, {}, {class: "form-control"} %>
-				<%#= s.select :advisor_id, User.where(account_type: "Faculty").map {|a| [a.fname + " " + a.lname, a.id]}, {}, {class: "form-control"} %>
-			</div>
-		</div>
-		<div class="form-group">
-		  <%#= f.label :times, class: "col-sm-3 control-label" %>
-			<div class="col-sm-9">
-				<%#= f.select :times, CourseTime.all.collect {|t| [t.time_type, t.id]}, {}, {class: "form-control"} %>
-				<%#= s.select :advisor_id, User.where(account_type: "Faculty").map {|a| [a.fname + " " + a.lname, a.id]}, {}, {class: "form-control"} %>
-			</div>
-		</div> -->
-	</fieldset>
 	
-  <fieldset>
+  <!-- <fieldset>
 		<legend><%= f.label "Course days:" %></legend>
-		<% CourseDay.each do |d| %>
+		<% CourseDay.all.each do |d| %>
       <div class="inlineblock checkbox_cols">
-				<%= t.check_box d.id, {checked: @course.dates.include?(d.id) } %>
-				<%= t.label d.day_type, for: "dates_#{d.id}" %>
+				<%= f.check_box d.id, {checked: @course.dates.include?(d.id) } %>
+				<%= f.label d.day_type, for: "dates_#{d.id}" %>
 			</div>
 		<% end %>
   </fieldset>
   <fieldset>
 		<legend><%= f.label "Course times:" %></legend>
-		<% CourseTime.each do |t| %>
+		<% CourseTime.all.each do |t| %>
       <div class="inlineblock checkbox_cols">
-				<%= t.check_box t.id, {checked: @course.times.include?(t.id) } %>
-				<%= t.label t.day_type, for: "times_#{t.id}" %>
+				<%= f.check_box t.id, {checked: @course.times.include?(t.id) } %>
+				<%= f.label t.time_type, for: "times_#{t.id}" %>
 			</div>
 		<% end %>
-  </fieldset>
+  </fieldset> -->
 	
 	
 	<div class="form-group">

@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/settings' => 'users#edit', as: :settings
   patch '/users/:id', to: 'users#update', as: :user
   delete '/users/:id', to: 'users#destroy'
+  get '/students/:id/course_histories', to: 'course_histories#index', as: :student_course_history
   
   # get '/faculty', to: 'faculty#index', as: :faculty
   # get '/faculty/:id', to: 'faculty#show', as: :user

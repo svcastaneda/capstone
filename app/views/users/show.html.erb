@@ -10,5 +10,18 @@
 
 
 <p class="small text-muted"><%= @user.id %></p>
-course history<br>
-reports<br>
+
+<div>
+	<p><strong>Account type:</strong> <%= @user.account_type %></p>
+	<p><strong>Email:</strong> <%= @user.email %></p>
+	<p><strong>Username:</strong> <%= @user.username %></p>
+
+<% if @user.student? %>
+	<p><strong>Degree:</strong> <%= @user.student.degree.name %></p>
+	<p><strong>Advisor:</strong> <%= User.find(@user.student.advisor_id).fname + ' ' +  User.find(@user.student.advisor_id).lname %></p>
+</div>
+<div>
+	<%= link_to 'Course History', student_course_history_path(@user.id), class: 'btn btn-primary' %>
+	<%= link_to 'Reports', student_reports_path(@user.id), class: 'btn btn-primary' %>
+<% end %>
+</div>
