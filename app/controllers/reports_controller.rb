@@ -11,7 +11,7 @@ class ReportsController < ApplicationController
   
   def create
     @params = Param.new(form_params)
-    @params.degree = student_params[:degree_id]
+    @params.degree_id = student_params[:degree_id]
     @params.location = 3
     
     if @params.save
