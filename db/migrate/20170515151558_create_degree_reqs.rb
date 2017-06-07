@@ -11,7 +11,7 @@ class CreateDegreeReqs < ActiveRecord::Migration
       # 3 = open
       # 4 = major
       # 5 = advanced
-      # 
+      # 6 = capstone
     end
   end
 end
