@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     elsif current_user.admin?
       render template: 'admins/index'
     elsif current_user.student?
+      @reports = Param.find(Report.where(student: current_student).map(&:params_id))
       render template: 'reports/index'
     end
   end
