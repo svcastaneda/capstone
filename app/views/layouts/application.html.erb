@@ -54,6 +54,10 @@
 				</li>
       </ul>
     </div><!-- /.navbar-collapse -->
+		<% else %>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<%= login_path %>" title="track reports"><span class="glyphicon glyphicon-log-in"></span>	 login</a></li>
+			</ul>
 		<% end %>
   </div><!-- /.container-fluid -->
 </nav>
