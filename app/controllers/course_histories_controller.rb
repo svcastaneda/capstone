@@ -1,6 +1,6 @@
 class CourseHistoriesController < ApplicationController
   def index
-    @courses = TakenCourse.where(student: current_student)
+    @courses = Course.find(TakenCourse.where(student: current_student).map(&:course_id))
   end
   
   def new
